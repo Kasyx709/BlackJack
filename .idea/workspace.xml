@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/game/CoreGame/Casino.py" line="20" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81372bf8-90f1-4180-b0cf-c19dc839ffa5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/BlackJack.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/CoreGame/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/BlackJack.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BlackJack.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Black_White_Faces_set/Black_and_White_52_Faces_hollow_pip_v.2.0.eps" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Black_White_Faces_set/Black_and_White_52_Faces_hollow_pip_v.2.0.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Black_White_Faces_set/Black_and_White_52_Faces_hollow_pip_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Black_White_Faces_set/Black_and_White_52_Faces_hollow_pip_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Black_White_Faces_set/Black_and_White_52_Faces_v.2.0.eps" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Black_White_Faces_set/Black_and_White_52_Faces_v.2.0.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Black_White_Faces_set/Black_and_White_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Black_White_Faces_set/Black_and_White_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.0.eps" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.0.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.0.modified.png" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.0.modified.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.0.modified.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.0.modified.xcf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Gray_Scale_Faces_Set/Gray_Scale_52_Faces_v.2.0.eps" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Gray_Scale_Faces_Set/Gray_Scale_52_Faces_v.2.0.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Gray_Scale_Faces_Set/Gray_Scale_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Gray_Scale_Faces_Set/Gray_Scale_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Blue_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Blue_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Dimpled_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Dimpled_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Green_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Green_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Oversaturated_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Oversaturated_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Platinum_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Platinum_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Purple_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Purple_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Red_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Red_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Scribbled_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Scribbled_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Sepia_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Sepia_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Worn_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Worn_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Worn_Dimpled_52_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/52_Cards_Various_Color_Faces_(INKSCAPE_ONLY)/Worn_Dimpled_52_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/Backs_Various_Patterns_(INKSCAPE_ONLY)/Playing_Card_Backs_INKSCAPE ONLY.v.2.0.eps" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/Backs_Various_Patterns_(INKSCAPE_ONLY)/Playing_Card_Backs_INKSCAPE ONLY.v.2.0.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/Backs_Various_Patterns_(INKSCAPE_ONLY)/Playing_Card_Backs_INKSCAPE ONLY.v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/Backs_Various_Patterns_(INKSCAPE_ONLY)/Playing_Card_Backs_INKSCAPE ONLY.v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/Jokers-2_Faces/Jokers_2_Faces_v.2.0.eps" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/Jokers-2_Faces/Jokers_2_Faces_v.2.0.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/Jokers-2_Faces/Jokers_2_Faces_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/Jokers-2_Faces/Jokers_2_Faces_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/Pips_and_Numbers/ESP_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/Pips_and_Numbers/ESP_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/Pips_and_Numbers/Pips_and_Numbers_v.2.0.eps" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/Pips_and_Numbers/Pips_and_Numbers_v.2.0.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/Pips_and_Numbers/Pips_and_Numbers_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/Pips_and_Numbers/Pips_and_Numbers_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/Pips_and_Numbers/Playing_Card_Box_Template_v.2.0.eps" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/Pips_and_Numbers/Playing_Card_Box_Template_v.2.0.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/Pips_and_Numbers/Playing_Card_Box_Template_v.2.0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/Pips_and_Numbers/Playing_Card_Box_Template_v.2.0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/color_cards.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/color_cards.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CardSets/color_cards.png" beforeDir="false" afterPath="$PROJECT_DIR$/game/CardSets/color_cards.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CoreGame/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/CoreGame/deckmaker.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/CoreGame/Casino.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/UserInterface/BlackJackUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/UserInterface/BlackJackUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/UserInterface/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/UserInterface/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/UserInterface/blackjacktable.png" beforeDir="false" afterPath="$PROJECT_DIR$/game/UserInterface/blackjacktable.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackJack/test/BlackJack.py" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/venv/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="BlackJack" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/game/UserInterface/BlackJackUI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-504">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/game/UserInterface/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/tkinter/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="3075" column="6" selection-start-line="3075" selection-start-column="6" selection-end-line="3075" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/game/CoreGame/Casino.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>manag</find>
+      <find>face_card</find>
+      <find>numPlayers</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/../TripleTriadZero/ttnnbot3.py" />
+        <option value="$PROJECT_DIR$/git/BlackJack/test/BlackJack.py" />
+        <option value="$PROJECT_DIR$/git/BlackJack/CoreGame/deckmaker.py" />
+        <option value="$PROJECT_DIR$/git/BlackJack/CoreGame/__init__.py" />
+        <option value="$PROJECT_DIR$/git/game/CardSets/__init__.py" />
+        <option value="$PROJECT_DIR$/git/BlackJack.py" />
+        <option value="$PROJECT_DIR$/game/CoreGame/deckmaker.py" />
+        <option value="$PROJECT_DIR$/game/CoreGame/__init__.py" />
+        <option value="$PROJECT_DIR$/game/CoreGame/Casino.py" />
+        <option value="$PROJECT_DIR$/BlackJack.py" />
+        <option value="$PROJECT_DIR$/game/UserInterface/BlackJackUI.py" />
+        <option value="$PROJECT_DIR$/game/UserInterface/__init__.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-40" />
+    <option name="y" value="250" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="BlackJack" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BlackJack" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BlackJack" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BlackJack" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BlackJack" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BlackJack" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="CoreGame" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BlackJack" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BlackJack" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="UserInterface" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TripleTriadZero" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\apps\Python\PycharmProjects\BlackJack" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.BlackJack (1)">
+    <configuration name="BlackJack (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BlackJack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BlackJack.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="BlackJackUI (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BlackJack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/game/UserInterface" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game/UserInterface/BlackJackUI.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="BlackJackUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BlackJack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/git/BlackJack/UserInterface" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/git/BlackJack/UserInterface/BlackJackUI.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Casino" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BlackJack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/game/CoreGame" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game/CoreGame/Casino.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="__init__ (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BlackJack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/game/CoreGame" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game/CoreGame/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.BlackJack (1)" />
+        <item itemvalue="Python.BlackJackUI (1)" />
+        <item itemvalue="Python.Casino" />
+        <item itemvalue="Python.__init__ (1)" />
+        <item itemvalue="Python.BlackJackUI" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81372bf8-90f1-4180-b0cf-c19dc839ffa5" name="Default Changelist" comment="" />
+      <created>1558673129760</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1558673129760</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.498366" visible="true" weight="0.24960506" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.501634" side_tool="true" weight="0.24960506" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32968238" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32968238" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32968238" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32968238" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.498366" visible="true" weight="0.24960506" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.501634" side_tool="true" weight="0.24960506" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32968238" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32968238" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32968238" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32968238" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/scipy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="8" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/matplotlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/484777608/scipy/special/_ufuncs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9882">
+          <caret line="550" column="4" selection-start-line="550" selection-start-column="4" selection-end-line="550" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../TripleTriadZero/ttnnbot3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#0#82#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BlackJack/CoreGame/deckmaker.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/hmac.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/multiprocessing/connection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="736" column="12" selection-start-line="736" selection-start-column="12" selection-end-line="736" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/multiprocessing/connection.pyi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="35" column="58" lean-forward="true" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/git/BlackJack/test/BlackJack.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="990">
+          <caret line="55" column="42" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/git/game/UserInterface/blackjacktable.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/git/game/UserInterface/BlackJackUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="6" column="10" lean-forward="true" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/git/game/UserInterface/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="9" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/git/game/CoreGame/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="33" column="12" lean-forward="true" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
+          <folding>
+            <element signature="e#27#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/git/game/CoreGame/deckmaker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1566">
+          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/git/game/CardSets/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/git/game/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/git/BlackJack.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/multiprocessing/queues.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="285" column="6" selection-start-line="285" selection-start-column="6" selection-end-line="285" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/multiprocessing/managers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="472" column="6" selection-start-line="472" selection-start-column="6" selection-end-line="472" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/CardSets/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/CoreGame/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="16" selection-end-column="7" />
+          <folding>
+            <element signature="e#21#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/484777608/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="4780" column="42" selection-start-line="4780" selection-start-column="42" selection-end-line="4780" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/re.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="251" column="4" selection-start-line="251" selection-start-column="4" selection-end-line="251" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BlackJack.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/CoreGame/Casino.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/UserInterface/BlackJackUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-504">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/tkinter/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="3075" column="6" selection-start-line="3075" selection-start-column="6" selection-end-line="3075" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/UserInterface/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
