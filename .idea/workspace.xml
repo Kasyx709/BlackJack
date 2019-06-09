@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="81372bf8-90f1-4180-b0cf-c19dc839ffa5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/BlackJack.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlackJack.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/CoreGame/Casino.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/CoreGame/Casino.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/UserInterface/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/UserInterface/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/img/GameTable.png" beforeDir="false" afterPath="$PROJECT_DIR$/game/Images/GameTable.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/img/LoginScreen.png" beforeDir="false" afterPath="$PROJECT_DIR$/game/Images/LoginScreen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/img/TransparentButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/game/Images/TransparentButton.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unused_snippets.py" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/unused_snippets.py" afterDir="false" />
-    </list>
+    <list default="true" id="81372bf8-90f1-4180-b0cf-c19dc839ffa5" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -166,6 +158,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\apps\Python\PycharmProjects\BlackJack\scratch" />
       <recent name="C:\apps\Python\PycharmProjects\BlackJack" />
     </key>
   </component>
@@ -333,7 +326,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.498366" visible="true" weight="0.25452608" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
