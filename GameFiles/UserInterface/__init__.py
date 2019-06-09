@@ -33,6 +33,19 @@ class Helpers:
         window.destroy()
 
     @staticmethod
+    def go_back(back_button, next_button, widgets):
+        if back_button['text'] == 'No':
+            back_button['text'] = 'Back'
+            next_button['text'] = 'Next'
+        for widget in widgets:
+            if widget.name is 'name_label':
+                widget['text'] = 'Player Name:'
+            elif widget.name is 'chosen_name':
+                widget['text'] = ''
+            elif widget.name is 'name_text':
+                widget.delete(0, 'end')
+
+    @staticmethod
     def resize_image(event, widget):
         _x = event.width
         _y = event.height
@@ -46,20 +59,17 @@ class Helpers:
     def start_xy(event, widget):
         widget.x = event.x
         widget.y = event.y
-        widget.update_idletasks()
 
     @staticmethod
     def stop_xy(event, widget):
         widget.x = None
         widget.y = None
-        widget.update_idletasks()
 
     @staticmethod
     def configure_xy(event, widget):
         x = widget.winfo_x() + (event.x - widget.x)
         y = widget.winfo_y() + (event.y - widget.y)
         widget.geometry("+%s+%s" % (x, y))
-        widget.update_idletasks()
 
 
 class BlackJackWindows(tk.Toplevel):
@@ -124,28 +134,36 @@ class PlayerScreen(tk.Canvas):
     def menu(self):
         def check_name():
             import re
-            name = re.sub(r"[^a-z]", '', re.escape(name_text.get()), flags=re.IGNORECASE)
+            name = re.sub(r"[^a-z]", ' ', re.escape(name_text.get()), flags=re.IGNORECASE)
             if name != r"":
-                return name
+                chosen_name['text'] = "\rYou've selected {}\r\nIs that correct?".format(name)
+                next_button['text'] = 'Yes'
+                back_button['text'] = 'No'
             else:
                 name_label.place(relx=0.5, rely=0.35, anchor=tk.CENTER)
                 name_label['fg'] = 'red'
                 name_label['text'] = "Please select a valid name."
-                menu.update_idletasks()
+                name_text.delete(0, 'end')
 
         menu = tk.Label(self, image=self.imageTk)
         menu.name = 'login_screen'
         menu.image = self.imageTk
         Helpers.background_images[menu.name] = self.bgImage
-        name_label = tk.Label(menu, text="Player Name:")
+        name_label = tk.Label(menu, text='Player Name:')
+        name_label.name = 'name_label'
         name_label['fg'] = 'Green'
         name_label['bg'] = 'Black'
+        chosen_name = tk.Label(menu, text='')
+        chosen_name.name = 'chosen_name'
         name_text = tk.Entry(menu)
-        back_button = tk.Button(menu, text="Back", command=None)
+        name_text.name = 'name_text'
+        back_button = tk.Button(menu, text="Back",
+                                command=lambda: Helpers.go_back(back_button, next_button, [name_label, name_text]))
         next_button = tk.Button(menu, text="Next", command=check_name)
         exit_button = tk.Button(menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
         name_label.place(relx=0.41, rely=0.35, anchor=tk.CENTER)
         name_text.place(relx=0.5, rely=0.4, relwidth=.3, relheight=.05, anchor=tk.CENTER)
+        chosen_name.place(relx=0.5, rely=0.51, anchor=tk.CENTER)
         back_button.place(relx=0.45, rely=0.9, anchor=tk.CENTER)
         next_button.place(relx=0.55, rely=0.9, anchor=tk.CENTER)
         exit_button.place(relx=0.05, rely=0.05, anchor=tk.CENTER)
