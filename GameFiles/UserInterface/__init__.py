@@ -108,7 +108,8 @@ class LoginScreen(tk.Canvas):
         Helpers.background_images[menu.name] = self.bgImage
         sp_button = tk.Button(menu, text="Single Player",
                               command=lambda: PlayerScreen(Helpers.open_window(self.parent)))
-        mp_button = tk.Button(menu, text="MultiPlayer", command=lambda: PlayerScreen(Helpers.open_window(self.parent)))
+        mp_button = tk.Button(menu, text="MultiPlayer",
+                              command=lambda: PlayerScreen(Helpers.open_window(self.parent)))
         exit_button = tk.Button(menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
         sp_button.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         mp_button.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
@@ -119,9 +120,11 @@ class LoginScreen(tk.Canvas):
 
 class PlayerScreen(tk.Canvas):
 
-    def __init__(self, parent):
+    def __init__(self, parent, multiplayer=False):
+        self.multiplayer = multiplayer
         self.parent = parent
         super().__init__(master=parent)
+        self.numPlayers = 1
         original_image = cv2.imread('GameFiles/Images/LoginScreen.png')
         b, g, r = cv2.split(original_image)
         self.colorCorrected = cv2.merge((r, g, b))
@@ -131,8 +134,23 @@ class PlayerScreen(tk.Canvas):
         self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.menu))
         self.pack(fill=tk.BOTH, expand=True)
 
+    def mp(self):
+        try:
+            num_players = tk.Label(self)
+            if num_players == '':
+                return
+            elif 0 < int(num_players) <= 7:
+                self.numPlayers = int(num_players)
+                return
+            else:
+                print("You've selected an invalid number of players, please try again.")
+
+        except ValueError:
+            print("That's not a valid number, please try again")
+
     def menu(self):
-        def check_name():
+
+        def _check_name():
             import re
             name = re.sub(r"[^a-z]", ' ', re.escape(name_text.get()), flags=re.IGNORECASE)
             if name != r"":
@@ -146,7 +164,7 @@ class PlayerScreen(tk.Canvas):
                 name_text.delete(0, 'end')
 
         menu = tk.Label(self, image=self.imageTk)
-        menu.name = 'login_screen'
+        menu.name = 'player_screen'
         menu.image = self.imageTk
         Helpers.background_images[menu.name] = self.bgImage
         name_label = tk.Label(menu, text='Player Name:')
@@ -159,7 +177,7 @@ class PlayerScreen(tk.Canvas):
         name_text.name = 'name_text'
         back_button = tk.Button(menu, text="Back",
                                 command=lambda: Helpers.go_back(back_button, next_button, [name_label, name_text]))
-        next_button = tk.Button(menu, text="Next", command=check_name)
+        next_button = tk.Button(menu, text="Next", command=_check_name)
         exit_button = tk.Button(menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
         name_label.place(relx=0.41, rely=0.35, anchor=tk.CENTER)
         name_text.place(relx=0.5, rely=0.4, relwidth=.3, relheight=.05, anchor=tk.CENTER)
