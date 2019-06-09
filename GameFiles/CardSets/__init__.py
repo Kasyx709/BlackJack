@@ -1,1 +1,1 @@
-__package__ = 'game'
+__package__ = 'GameFiles'

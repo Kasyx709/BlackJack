@@ -1,4 +1,4 @@
-__package__ = 'game'
+__package__ = 'GameFiles'
 from numpy.random import choice
 from scipy.special import binom
 from pandas import DataFrame

@@ -1,4 +1,4 @@
-__package__ = 'game'
+__package__ = 'GameFiles'
 
 import sys
 from GameFiles.CoreGame.Casino import House
@@ -79,7 +79,7 @@ class LoginScreen(tk.Canvas):
     def __init__(self, parent):
         self.parent = parent
         super().__init__(master=parent)
-        original_image = cv2.imread('game/Images/LoginScreen.png')
+        original_image = cv2.imread('GameFiles/Images/LoginScreen.png')
         b, g, r = cv2.split(original_image)
         self.colorCorrected = cv2.merge((r, g, b))
         self.bgImage = Image.fromarray(self.colorCorrected)
@@ -105,7 +105,7 @@ class LoginScreen(tk.Canvas):
 
 def show_card(master_window, player=None, suit=None, cardtype=None):
     # card_image = ImageTk.PhotoImage(Image.open())
-    cv_image = cv2.imread('game/CardSets/color_cards.png')
+    cv_image = cv2.imread('GameFiles/CardSets/color_cards.png')
     # (1600, 650) Image Size
     # Each Card = + 127 x 90 with 2 pixels space between on each side
     # Math for x values = prev value + 132
@@ -167,7 +167,7 @@ class GameTable(tk.Canvas):
 
     def __init__(self):
         super(GameTable, self).__init__()
-        self.bg_image = tk.PhotoImage(file='game/Images/GameTable.png')
+        self.bg_image = tk.PhotoImage(file='GameFiles/Images/GameTable.png')
         self.image = self.bg_image
         self.create_image(1, 1, image=self.bg_image, anchor=tk.NW)
         hit = tk.Button(master=self, text='Hit', command=None).pack()
