@@ -1,13 +1,8 @@
 __package__ = 'GameFiles'
-
-import sys
-from GameFiles.CoreGame.Casino import House
-
-House()
 from PIL import ImageTk
 from PIL import Image
 import cv2
-from GameFiles.CoreGame.Casino import House
+import sys
 
 py_version = sys.version_info[:3]
 if py_version >= (3, 0):
@@ -24,6 +19,13 @@ if py_version <= (2, 7):
 # Helper Functions placed into a class for lazy importing
 
 class Helpers:
+    background_images = {}
+
+    @staticmethod
+    def open_window(parent):
+        parent.withdraw()
+        new_window = BlackJackWindows(parent)
+        return new_window
 
     @staticmethod
     def close_window(window):
@@ -34,7 +36,7 @@ class Helpers:
     def resize_image(event, widget):
         _x = event.width
         _y = event.height
-        image = BlackJackWindows.background_images[widget.name]
+        image = Helpers.background_images[widget.name]
         resize = image.resize((_x, _y))
         _image = ImageTk.PhotoImage(image=resize)
         widget.image = _image
@@ -44,25 +46,26 @@ class Helpers:
     def start_xy(event, widget):
         widget.x = event.x
         widget.y = event.y
+        widget.update_idletasks()
 
     @staticmethod
     def stop_xy(event, widget):
         widget.x = None
         widget.y = None
+        widget.update_idletasks()
 
     @staticmethod
     def configure_xy(event, widget):
         x = widget.winfo_x() + (event.x - widget.x)
         y = widget.winfo_y() + (event.y - widget.y)
         widget.geometry("+%s+%s" % (x, y))
+        widget.update_idletasks()
 
 
 class BlackJackWindows(tk.Toplevel):
-    background_images = {}
 
     def __init__(self, parent):
         super().__init__(master=parent)
-
         width, height = parent.wm_minsize()
         self.wm_minsize(width, height)
         self.overrideredirect(True)
@@ -92,13 +95,60 @@ class LoginScreen(tk.Canvas):
         menu = tk.Label(self, image=self.imageTk)
         menu.name = 'login_screen'
         menu.image = self.imageTk
-        BlackJackWindows.background_images[menu.name] = self.bgImage
-        sp_button = tk.Button(menu, text="Single Player", command=None)
-        mp_button = tk.Button(menu, text="MultiPlayer", command=None)
+        Helpers.background_images[menu.name] = self.bgImage
+        sp_button = tk.Button(menu, text="Single Player",
+                              command=lambda: PlayerScreen(Helpers.open_window(self.parent)))
+        mp_button = tk.Button(menu, text="MultiPlayer", command=lambda: PlayerScreen(Helpers.open_window(self.parent)))
         exit_button = tk.Button(menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
         sp_button.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         mp_button.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
         exit_button.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
+        menu.place(relx=0.5, rely=0.5, relwidth=1, relheight=1, anchor=tk.CENTER)
+        return menu
+
+
+class PlayerScreen(tk.Canvas):
+
+    def __init__(self, parent):
+        self.parent = parent
+        super().__init__(master=parent)
+        original_image = cv2.imread('GameFiles/Images/LoginScreen.png')
+        b, g, r = cv2.split(original_image)
+        self.colorCorrected = cv2.merge((r, g, b))
+        self.bgImage = Image.fromarray(self.colorCorrected)
+        self.imageTk = ImageTk.PhotoImage(image=self.bgImage)
+        self.menu = self.menu()
+        self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.menu))
+        self.pack(fill=tk.BOTH, expand=True)
+
+    def menu(self):
+        def check_name():
+            import re
+            name = re.sub(r"[^a-z]", '', re.escape(name_text.get()), flags=re.IGNORECASE)
+            if name != r"":
+                return name
+            else:
+                name_label.place(relx=0.5, rely=0.35, anchor=tk.CENTER)
+                name_label['fg'] = 'red'
+                name_label['text'] = "Please select a valid name."
+                menu.update_idletasks()
+
+        menu = tk.Label(self, image=self.imageTk)
+        menu.name = 'login_screen'
+        menu.image = self.imageTk
+        Helpers.background_images[menu.name] = self.bgImage
+        name_label = tk.Label(menu, text="Player Name:")
+        name_label['fg'] = 'Green'
+        name_label['bg'] = 'Black'
+        name_text = tk.Entry(menu)
+        back_button = tk.Button(menu, text="Back", command=None)
+        next_button = tk.Button(menu, text="Next", command=check_name)
+        exit_button = tk.Button(menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
+        name_label.place(relx=0.41, rely=0.35, anchor=tk.CENTER)
+        name_text.place(relx=0.5, rely=0.4, relwidth=.3, relheight=.05, anchor=tk.CENTER)
+        back_button.place(relx=0.45, rely=0.9, anchor=tk.CENTER)
+        next_button.place(relx=0.55, rely=0.9, anchor=tk.CENTER)
+        exit_button.place(relx=0.05, rely=0.05, anchor=tk.CENTER)
         menu.place(relx=0.5, rely=0.5, relwidth=1, relheight=1, anchor=tk.CENTER)
         return menu
 
