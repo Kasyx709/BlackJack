@@ -1,3 +1,3 @@
-from game.UserInterface.BlackJackUI import BlackJackUI
+from GameFiles.UserInterface.BlackJackUI import BlackJackUI
 
 BlackJackUI()

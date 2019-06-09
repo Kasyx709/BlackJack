@@ -1,13 +1,13 @@
 __package__ = 'game'
 
 import sys
-from game.CoreGame.Casino import House
+from GameFiles.CoreGame.Casino import House
 
 House()
 from PIL import ImageTk
 from PIL import Image
 import cv2
-from game.CoreGame.Casino import House
+from GameFiles.CoreGame.Casino import House
 
 py_version = sys.version_info[:3]
 if py_version >= (3, 0):
@@ -79,7 +79,7 @@ class LoginScreen(tk.Canvas):
     def __init__(self, parent):
         self.parent = parent
         super().__init__(master=parent)
-        original_image = cv2.imread('game/img/LoginScreen.png')
+        original_image = cv2.imread('game/Images/LoginScreen.png')
         b, g, r = cv2.split(original_image)
         self.colorCorrected = cv2.merge((r, g, b))
         self.bgImage = Image.fromarray(self.colorCorrected)
@@ -167,7 +167,7 @@ class GameTable(tk.Canvas):
 
     def __init__(self):
         super(GameTable, self).__init__()
-        self.bg_image = tk.PhotoImage(file='game/img/GameTable.png')
+        self.bg_image = tk.PhotoImage(file='game/Images/GameTable.png')
         self.image = self.bg_image
         self.create_image(1, 1, image=self.bg_image, anchor=tk.NW)
         hit = tk.Button(master=self, text='Hit', command=None).pack()

@@ -1,4 +1,4 @@
-from game.CoreGame import MetaHouse
+from GameFiles.CoreGame import MetaHouse
 
 
 class House(metaclass=MetaHouse):

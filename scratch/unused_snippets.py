@@ -1,4 +1,4 @@
-self.buttonOriginal = cv2.imread('game/img/TransparentButton.png')
+self.buttonOriginal = cv2.imread('game/Images/TransparentButton.png')
         b, g, r = cv2.split(self.buttonOriginal)
         buttonImage = cv2.merge((r, g, b))
         _buttonImage = Image.fromarray(buttonImage)
@@ -10,7 +10,7 @@ class __BlackJackWindows(tk.Toplevel):
         self.withdraw()
         self.root = master
         self.canvas = tk.Canvas(master)
-        self.bgImageOriginal = cv2.imread('game/img/LoginScreen.png')
+        self.bgImageOriginal = cv2.imread('game/Images/LoginScreen.png')
         b, g, r = cv2.split(self.bgImageOriginal)
         self.bgImage = cv2.merge((r, g, b))
         self.img = Image.fromarray(self.bgImage)
