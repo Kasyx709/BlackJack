@@ -3,6 +3,7 @@ from PIL import ImageTk
 from PIL import Image
 import cv2
 import sys
+import re
 
 py_version = sys.version_info[:3]
 if py_version >= (3, 0):
@@ -14,6 +15,10 @@ if py_version <= (2, 7):
     import Tkinter as tk
     import tkFont
     from multiprocessing.dummy import Process as thread
+
+from GameFiles.CoreGame.Casino import House
+
+house = House()
 
 
 # Helper Functions placed into a class for lazy importing
@@ -31,19 +36,6 @@ class Helpers:
     def close_window(window):
         window.protocol("WM_DELETE_WINDOW")
         window.destroy()
-
-    @staticmethod
-    def go_back(back_button, next_button, widgets):
-        if back_button['text'] == 'No':
-            back_button['text'] = 'Back'
-            next_button['text'] = 'Next'
-        for widget in widgets:
-            if widget.name is 'name_label':
-                widget['text'] = 'Player Name:'
-            elif widget.name is 'chosen_name':
-                widget['text'] = ''
-            elif widget.name is 'name_text':
-                widget.delete(0, 'end')
 
     @staticmethod
     def resize_image(event, widget):
@@ -121,10 +113,11 @@ class LoginScreen(tk.Canvas):
 class PlayerScreen(tk.Canvas):
 
     def __init__(self, parent, multiplayer=False):
+        super().__init__(master=parent)
         self.multiplayer = multiplayer
         self.parent = parent
-        super().__init__(master=parent)
         self.numPlayers = 1
+        self.numDecks = 1
         original_image = cv2.imread('GameFiles/Images/LoginScreen.png')
         b, g, r = cv2.split(original_image)
         self.colorCorrected = cv2.merge((r, g, b))
@@ -132,7 +125,38 @@ class PlayerScreen(tk.Canvas):
         self.imageTk = ImageTk.PhotoImage(image=self.bgImage)
         self.menu = self.menu()
         self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.menu))
+        self.name_label = tk.Label(self.menu, text='Player Name:')
+        self.name_label.name = 'name_label'
+        self.name_label['fg'] = 'Green'
+        self.name_label['bg'] = 'Black'
+        self.name_label.place(relx=0.41, rely=0.35, anchor=tk.CENTER)
+        self.chosen_name = tk.Label(self.menu, text='')
+        self.chosen_name.name = 'chosen_name'
+        self.chosen_name.place(relx=0.5, rely=0.51, anchor=tk.CENTER)
+        self.selection_text = tk.Entry(self.menu)
+        self.selection_text.name = 'selection_text'
+        self.selection_text.place(relx=0.5, rely=0.4, relwidth=.3, relheight=.05, anchor=tk.CENTER)
+        self.back_button = tk.Button(self.menu, text="Back",
+                                     command=lambda: self.go_back([self.name_label, self.selection_text]))
+        self.back_button.place(relx=0.45, rely=0.9, anchor=tk.CENTER)
+        self.next_button = tk.Button(self.menu, text="Next", command=self.set_name)
+        self.next_button.place(relx=0.55, rely=0.9, anchor=tk.CENTER)
+        self.exit_button = tk.Button(self.menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
+        self.exit_button.place(relx=0.05, rely=0.05, anchor=tk.CENTER)
         self.pack(fill=tk.BOTH, expand=True)
+        self.back_button = None
+
+    def go_back(self, widgets):
+        if self.back_button['text'] == 'No':
+            self.back_button['text'] = 'Back'
+            self.next_button['text'] = 'Next'
+        for widget in widgets:
+            if widget.name is 'name_label':
+                widget['text'] = 'Player Name:'
+            elif widget.name is 'chosen_name':
+                widget['text'] = ''
+            elif widget.name is 'name_text':
+                widget.delete(0, 'end')
 
     def mp(self):
         try:
@@ -149,44 +173,59 @@ class PlayerScreen(tk.Canvas):
             print("That's not a valid number, please try again")
 
     def menu(self):
-
-        def _check_name():
-            import re
-            name = re.sub(r"[^a-z]", ' ', re.escape(name_text.get()), flags=re.IGNORECASE)
-            if name != r"":
-                chosen_name['text'] = "\rYou've selected {}\r\nIs that correct?".format(name)
-                next_button['text'] = 'Yes'
-                back_button['text'] = 'No'
-            else:
-                name_label.place(relx=0.5, rely=0.35, anchor=tk.CENTER)
-                name_label['fg'] = 'red'
-                name_label['text'] = "Please select a valid name."
-                name_text.delete(0, 'end')
-
         menu = tk.Label(self, image=self.imageTk)
         menu.name = 'player_screen'
         menu.image = self.imageTk
         Helpers.background_images[menu.name] = self.bgImage
-        name_label = tk.Label(menu, text='Player Name:')
-        name_label.name = 'name_label'
-        name_label['fg'] = 'Green'
-        name_label['bg'] = 'Black'
-        chosen_name = tk.Label(menu, text='')
-        chosen_name.name = 'chosen_name'
-        name_text = tk.Entry(menu)
-        name_text.name = 'name_text'
-        back_button = tk.Button(menu, text="Back",
-                                command=lambda: Helpers.go_back(back_button, next_button, [name_label, name_text]))
-        next_button = tk.Button(menu, text="Next", command=_check_name)
-        exit_button = tk.Button(menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
-        name_label.place(relx=0.41, rely=0.35, anchor=tk.CENTER)
-        name_text.place(relx=0.5, rely=0.4, relwidth=.3, relheight=.05, anchor=tk.CENTER)
-        chosen_name.place(relx=0.5, rely=0.51, anchor=tk.CENTER)
-        back_button.place(relx=0.45, rely=0.9, anchor=tk.CENTER)
-        next_button.place(relx=0.55, rely=0.9, anchor=tk.CENTER)
-        exit_button.place(relx=0.05, rely=0.05, anchor=tk.CENTER)
         menu.place(relx=0.5, rely=0.5, relwidth=1, relheight=1, anchor=tk.CENTER)
         return menu
+
+    def set_name(self):
+        name = re.sub(r"[^a-z]", ' ', re.escape(self.selection_text.get()), flags=re.IGNORECASE)
+        if name != r"":
+            self.chosen_name['text'] = "\rYou've selected {}\r\nIs that correct?".format(name)
+            self.next_button['text'] = 'Yes'
+            self.back_button['text'] = 'No'
+            self.next_button['command'] = self.verify_name
+
+        else:
+            self.name_label.place(relx=0.5, rely=0.35, anchor=tk.CENTER)
+            self.name_label['fg'] = 'red'
+            self.name_label['text'] = "Please select a valid name."
+            self.selection_text.delete(0, 'end')
+
+    def num_decks(self):
+        if self.next_button['text'] == 'Yes':
+            self.selection_text.delete(0, 'end')
+            self.next_button['text'] = 'Ok'
+
+        if self.next_button['text'] == 'Ok':
+            self.chosen_name['text'] = "How many Decks would you like to use?" \
+                                       "\nThe Default is 1 and Maximum allowed is 8" \
+                                       "\n Please select a number between 1 and 8 or press Enter to use the Default of 1"
+
+            i = re.sub(r'[^0-9]', self.selection_text.get(), '')
+            while 1:
+                if i is '':
+                    i = 1
+                elif 0 <= int(i) <= 8:
+                    self.numDecks = int(i)
+                    self.chosen_name['text'] = "\rYou've selected {}\nIs that correct?".format(self.numDecks)
+                    self.next_button['command'] = self.verify_decks
+                    break
+                else:
+                    self.chosen_name['text'] = r"You've selected an invalid number, please try again."
+
+    def verify_decks(self):
+        house.numDecks = self.numDecks
+        return
+
+    def verify_name(self):
+        house.numPlayers = self.numPlayers
+        self.chosen_name['text'] = "How many Decks would you like to use?" \
+                                   "\nThe Default is 1 and Maximum allowed is 8" \
+                                   "\n Please select a number between 1 and 8 or press Enter to use the Default of 1"
+        self.next_button['command'] = self.num_decks
 
 
 def show_card(master_window, player=None, suit=None, cardtype=None):

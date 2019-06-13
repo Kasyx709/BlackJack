@@ -1,4 +1,5 @@
 __package__ = 'GameFiles'
+import os
 from numpy.random import choice
 from scipy.special import binom
 from pandas import DataFrame
@@ -6,8 +7,6 @@ from pandas import DataFrame
 from multiprocessing import JoinableQueue as jQueue
 from multiprocessing.dummy import Process as Thread
 from multiprocessing.managers import BaseManager
-import os
-
 
 class MetaHouse(type):
     _instances = {}
