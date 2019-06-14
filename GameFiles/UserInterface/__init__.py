@@ -144,7 +144,6 @@ class PlayerScreen(tk.Canvas):
         self.exit_button = tk.Button(self.menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
         self.exit_button.place(relx=0.05, rely=0.05, anchor=tk.CENTER)
         self.pack(fill=tk.BOTH, expand=True)
-        self.back_button = None
 
     def go_back(self, widgets):
         if self.back_button['text'] == 'No':
@@ -174,6 +173,7 @@ class PlayerScreen(tk.Canvas):
 
     def menu(self):
         menu = tk.Label(self, image=self.imageTk)
+        menu.pack()
         menu.name = 'player_screen'
         menu.image = self.imageTk
         Helpers.background_images[menu.name] = self.bgImage
