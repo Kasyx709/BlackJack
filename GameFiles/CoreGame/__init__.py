@@ -1,4 +1,3 @@
-__package__ = 'GameFiles'
 import os
 from numpy.random import choice
 from scipy.special import binom
@@ -16,8 +15,7 @@ class MetaHouse(type):
         _house = super().__new__(mcs, names, bases, m_dict)
         mcs.find_port(_house)
         setattr(_house, 'buildHouse', mcs.build_house)
-        setattr(_house, 'makePlayer', Player)
-        setattr(_house, 'makeDealer', Dealer)
+        setattr(_house, 'token', mcs.token)
         setattr(_house, 'makeDeck', Deck)
         setattr(_house, 'shuffle', Deck.shuffle)
         setattr(_house, 'load_shoe', Deck.load_shoe)
@@ -59,33 +57,6 @@ class MetaHouse(type):
         return
 
 
-class Player(object):
-    class PlayerManager(BaseManager): pass
-
-    PlayerManager.register('cards')
-
-    def __init__(self, name=None, port=None):
-        super(Player, self).__init__()
-        self.points = 0
-        self.playerID = r'{}'.format(name)
-        self.playerKey = os.urandom(50)
-        self.port = port
-        self.player = self.PlayerManager(address=('localhost', self.port), authkey=MetaHouse.token)
-        self.playerCards = dict()
-
-
-class Dealer(object):
-    class DealerManager(BaseManager): pass
-
-    DealerManager.register('cards')
-
-    def __init__(self, port=None):
-        super(Dealer, self).__init__()
-        self.points = 0
-        self.dealerKey = os.urandom(256)
-        self.port = port
-        self.dealer = self.DealerManager(address=('localhost', self.port), authkey=MetaHouse.token)
-        self.dealerCards = dict()
 
 
 class Deck(object):

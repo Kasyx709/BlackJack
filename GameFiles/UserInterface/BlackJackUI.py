@@ -3,7 +3,7 @@ from __future__ import division
 from . import tk
 from . import tkFont
 from . import BlackJackWindows
-from . import LoginScreen
+from . import SelectGameType
 from . import Helpers
 
 
@@ -22,7 +22,7 @@ class BlackJackUI(object):
         self.root.wm_attributes("-topmost", True)
         self.root.configure(background='Green')
         self.root.withdraw()
-        LoginScreen(parent=BlackJackWindows(self.root))
+        SelectGameType(parent=BlackJackWindows(self.root))
         self.root.bind("<ButtonPress-1>", lambda event: Helpers.start_xy(event, self.root))
         self.root.bind("<ButtonRelease-1>", lambda event: Helpers.stop_xy(event, self.root))
         self.root.bind("<B1-Motion>", lambda event: Helpers.configure_xy(event, self.root))

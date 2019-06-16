@@ -2,7 +2,6 @@ from GameFiles.CoreGame import MetaHouse
 
 
 class House(metaclass=MetaHouse):
-    players = {}
     """
     Readies a new game by asking players how many decks
     they'd like to use and how many players will be playing
@@ -13,16 +12,15 @@ class House(metaclass=MetaHouse):
     """
 
     def __init__(self):
-        self.numPlayers = 1
-        self.numDecks = 1
+        self.numPlayers = 0
+        self.numDecks = 0
         self.buildHouse()
         self.server.start()
+        self.players = None
         self.deck = None
         self.shoe = None
 
     def start_game(self):
-        self.num_players()
-        self.create_players()
         self.deck = self.makeDeck()
         self.shoe = self.load_shoe('localhost', self.port)
         self.shoe.connect()
@@ -77,17 +75,6 @@ class House(metaclass=MetaHouse):
                 return name
             else:
                 print("Please select a valid name.")
-
-    def create_players(self):
-        try:
-            # id_key 0 will always be the dealer
-            self.players[0] = self.makeDealer()
-            for i in range(1, self.numPlayers + 1):
-                name = self.create_player_name(id_key=i)
-                player = self.makePlayer(name=name, port=self.port)
-                self.players[i] = player
-        except Exception as e:
-            print(e.__repr__())
 
     def test_game(self):
         self.start_game()

@@ -17,6 +17,7 @@ if py_version <= (2, 7):
     from multiprocessing.dummy import Process as thread
 
 from GameFiles.CoreGame.Casino import House
+from GameFiles.CoreGame.Players import Player, Dealer
 
 house = House()
 
@@ -67,6 +68,7 @@ class Helpers:
 class BlackJackWindows(tk.Toplevel):
 
     def __init__(self, parent):
+        self.__doc__ = tk.Toplevel.__init__.__doc__
         super().__init__(master=parent)
         width, height = parent.wm_minsize()
         self.wm_minsize(width, height)
@@ -79,7 +81,37 @@ class BlackJackWindows(tk.Toplevel):
         self.bind("<B1-Motion>", lambda event: Helpers.configure_xy(event, self))
 
 
-class LoginScreen(tk.Canvas):
+class BlackJackLabelWidget(tk.Label):
+    label_widgets = {}
+
+    def __init__(self, parent, relx, rely, cnf={}, **kwargs):
+        self.__doc__ = tk.Label.__init__.__doc__
+
+        super(BlackJackLabelWidget, self).__init__(parent, cnf=cnf, **kwargs)
+        self.place(relx=relx, rely=rely, anchor=tk.CENTER)
+
+
+class BlackJackEntryWidget(tk.Entry):
+    entry_widgets = {}
+
+    def __init__(self, parent, relx, rely, relwidth, relheight, cnf={}, **kwargs):
+        self.__doc__ = tk.Entry.__init__.__doc__
+        super().__init__(master=parent, cnf={}, **kwargs)
+        self.place(relx=0.5, rely=0.5, relwidth=relwidth, relheight=relheight, anchor=tk.CENTER)
+
+
+class BlackJackButtons(tk.Button):
+    buttons = {}
+
+    def __init__(self, parent, relx, rely, cnf={}, **kwargs):
+        self.__doc__ = tk.Button.__init__.__doc__
+        super().__init__(master=parent, cnf=cnf, **kwargs)
+        self.place(relx=relx, rely=rely, anchor=tk.CENTER)
+        self.parentCommand = None
+        self.parent = parent
+
+
+class SelectGameType(tk.Canvas):
 
     def __init__(self, parent):
         self.parent = parent
@@ -99,9 +131,9 @@ class LoginScreen(tk.Canvas):
         menu.image = self.imageTk
         Helpers.background_images[menu.name] = self.bgImage
         sp_button = tk.Button(menu, text="Single Player",
-                              command=lambda: PlayerScreen(Helpers.open_window(self.parent)))
+                              command=lambda: SelectPlayers(Helpers.open_window(self.parent)))
         mp_button = tk.Button(menu, text="MultiPlayer",
-                              command=lambda: PlayerScreen(Helpers.open_window(self.parent)))
+                              command=lambda: SelectPlayers(Helpers.open_window(self.parent), mp=True))
         exit_button = tk.Button(menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
         sp_button.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         mp_button.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
@@ -110,122 +142,207 @@ class LoginScreen(tk.Canvas):
         return menu
 
 
-class PlayerScreen(tk.Canvas):
+class SelectPlayers(tk.Canvas):
 
-    def __init__(self, parent, multiplayer=False):
+    def __init__(self, parent, mp=False):
         super().__init__(master=parent)
-        self.multiplayer = multiplayer
+        self.pack(fill=tk.BOTH, expand=True)
+        self.bg = BlackJackLabelWidget(self, 0.5, 0.5)
+        self.bg.name = 'select_players'
         self.parent = parent
-        self.numPlayers = 1
-        self.numDecks = 1
         original_image = cv2.imread('GameFiles/Images/LoginScreen.png')
         b, g, r = cv2.split(original_image)
         self.colorCorrected = cv2.merge((r, g, b))
         self.bgImage = Image.fromarray(self.colorCorrected)
         self.imageTk = ImageTk.PhotoImage(image=self.bgImage)
-        self.menu = self.menu()
-        self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.menu))
-        self.name_label = tk.Label(self.menu, text='Player Name:')
-        self.name_label.name = 'name_label'
-        self.name_label['fg'] = 'Green'
-        self.name_label['bg'] = 'Black'
-        self.name_label.place(relx=0.41, rely=0.35, anchor=tk.CENTER)
-        self.chosen_name = tk.Label(self.menu, text='')
-        self.chosen_name.name = 'chosen_name'
-        self.chosen_name.place(relx=0.5, rely=0.51, anchor=tk.CENTER)
-        self.selection_text = tk.Entry(self.menu)
-        self.selection_text.name = 'selection_text'
-        self.selection_text.place(relx=0.5, rely=0.4, relwidth=.3, relheight=.05, anchor=tk.CENTER)
-        self.back_button = tk.Button(self.menu, text="Back",
-                                     command=lambda: self.go_back([self.name_label, self.selection_text]))
-        self.back_button.place(relx=0.45, rely=0.9, anchor=tk.CENTER)
-        self.next_button = tk.Button(self.menu, text="Next", command=self.set_name)
-        self.next_button.place(relx=0.55, rely=0.9, anchor=tk.CENTER)
-        self.exit_button = tk.Button(self.menu, text="Exit", command=lambda: Helpers.close_window(self.parent))
-        self.exit_button.place(relx=0.05, rely=0.05, anchor=tk.CENTER)
-        self.pack(fill=tk.BOTH, expand=True)
+        self.bg.image = self.imageTk
+        Helpers.background_images[self.bg.name] = self.bgImage
+        self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.bg))
+        self.text_label = BlackJackLabelWidget(self, 0.41, 0.35, text='')
+        self.notification = BlackJackLabelWidget(self, 0.5, 0.6)
+        self.player_text = BlackJackEntryWidget(self, 0.5, 0.4, 0.3, 0.05, text='')
+        self.yes_next = BlackJackButtons(self, 0.55, 0.9, text='Next', command=self._set_name)
+        self.yes_next.parentCommand = self.welcome_player
+        self.no_back = BlackJackButtons(self, 0.45, 0.9, text='Back', command=self._no_back)
+        self.exit_button = BlackJackButtons(self, 0.05, 0.05, text="Exit",
+                                            command=lambda: Helpers.close_window(self.parent))
 
-    def go_back(self, widgets):
-        if self.back_button['text'] == 'No':
-            self.back_button['text'] = 'Back'
-            self.next_button['text'] = 'Next'
-        for widget in widgets:
-            if widget.name is 'name_label':
-                widget['text'] = 'Player Name:'
-            elif widget.name is 'chosen_name':
-                widget['text'] = ''
-            elif widget.name is 'name_text':
-                widget.delete(0, 'end')
-
-    def mp(self):
-        try:
-            num_players = tk.Label(self)
-            if num_players == '':
-                return
-            elif 0 < int(num_players) <= 7:
-                self.numPlayers = int(num_players)
-                return
-            else:
-                print("You've selected an invalid number of players, please try again.")
-
-        except ValueError:
-            print("That's not a valid number, please try again")
-
-    def menu(self):
-        menu = tk.Label(self, image=self.imageTk)
-        menu.pack()
-        menu.name = 'player_screen'
-        menu.image = self.imageTk
-        Helpers.background_images[menu.name] = self.bgImage
-        menu.place(relx=0.5, rely=0.5, relwidth=1, relheight=1, anchor=tk.CENTER)
-        return menu
-
-    def set_name(self):
-        name = re.sub(r"[^a-z]", ' ', re.escape(self.selection_text.get()), flags=re.IGNORECASE)
-        if name != r"":
-            self.chosen_name['text'] = "\rYou've selected {}\r\nIs that correct?".format(name)
-            self.next_button['text'] = 'Yes'
-            self.back_button['text'] = 'No'
-            self.next_button['command'] = self.verify_name
-
+        self.mp = mp
+        self.playerNames = dict()
+        if self.mp is True:
+            _choose_numbers(self.text_label, self.notification, self.player_text,
+                            self.yes_next, self.no_back,
+                            'numPlayers')
         else:
-            self.name_label.place(relx=0.5, rely=0.35, anchor=tk.CENTER)
-            self.name_label['fg'] = 'red'
-            self.name_label['text'] = "Please select a valid name."
-            self.selection_text.delete(0, 'end')
+            PlayerSelections['numPlayers'] = 1
+            self.welcome_player()
 
-    def num_decks(self):
-        if self.next_button['text'] == 'Yes':
-            self.selection_text.delete(0, 'end')
-            self.next_button['text'] = 'Ok'
+    def welcome_player(self):
+        self.yes_next['command'] = self._set_name
+        self.text_label['text'] = 'Player Name:'
+        self.notification['text'] = "Welcome Player 1!" \
+                                    "\nPlease choose a name"
 
-        if self.next_button['text'] == 'Ok':
-            self.chosen_name['text'] = "How many Decks would you like to use?" \
-                                       "\nThe Default is 1 and Maximum allowed is 8" \
-                                       "\n Please select a number between 1 and 8 or press Enter to use the Default of 1"
+    def _set_name(self):
+        name = re.sub(r"[^a-z]", '', re.escape(self.player_text.get()), flags=re.IGNORECASE)
+        if name != r'':
+            self.notification['fg'] = 'black'
+            self.notification['text'] = "You've selected {}\nIs that correct?".format(name)
+            self.yes_next['command'] = lambda: self._confirm_name(name)
+        else:
+            self.notification['text'] = "Please select a valid name."
+            self.notification['fg'] = 'Red'
 
-            i = re.sub(r'[^0-9]', self.selection_text.get(), '')
+    def _confirm_name(self, name):
+        self.player_text.delete(0, 'end')
+        if len(name) <= 50:
+            self.get_id(name)
+        else:
+            self.notification['text'] = "Name exceeds 50 characters\nPlease select a valid name."
+            self.notification['fg'] = 'Red'
+            self.yes_next['command'] = self._set_name
+
+    def get_id(self, name):
+        try:
+            self.notification['text'] = ''
+            _id = next(i for i in range(1, PlayerSelections['numPlayers'] + 1) if i not in self.playerNames.keys())
+            self.playerNames[_id] = name
+            if len(self.playerNames.keys()) == PlayerSelections['numPlayers']:
+                self.create_players()
+            else:
+                print('fff')
+                self.yes_next['command'] = self._set_name
+                self.text_label['text'] = 'Player Name:'
+                self.notification['text'] = "Welcome Player {}!" \
+                                            "\nPlease choose a name".format(_id + 1)
+        except StopIteration:
+            pass
+
+    def _no_back(self, *event):
+        pass
+
+    def create_players(self):
+        try:
+            # id_key 0 will always be the dealer
+            self.playerNames[0] = 'Dealer'
+            for i, name in self.playerNames.items():
+                if i is 0:
+                    PlayerObjects[0] = Dealer(player_id=0, port=house.port, authkey=house.token)
+                else:
+                    PlayerObjects[i] = Player(player_id=i, name=name, port=house.port, authkey=house.token)
+            self.destroy()
+            SelectDecks(self.parent)
+        except Exception as e:
+            print(e.__repr__())
+
+
+class SelectDecks(tk.Canvas):
+
+    def __init__(self, parent):
+        super().__init__(master=parent)
+        self.pack(fill=tk.BOTH, expand=True)
+        self.bg = BlackJackLabelWidget(self, 0.5, 0.5)
+        self.bg.name = 'select_decks'
+        self.parent = parent
+        original_image = cv2.imread('GameFiles/Images/LoginScreen.png')
+        b, g, r = cv2.split(original_image)
+        self.colorCorrected = cv2.merge((r, g, b))
+        self.bgImage = Image.fromarray(self.colorCorrected)
+        self.imageTk = ImageTk.PhotoImage(image=self.bgImage)
+        self.bg.image = self.imageTk
+        Helpers.background_images[self.bg.name] = self.bgImage
+        self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.bg))
+        self.text_label = BlackJackLabelWidget(self, 0.41, 0.35, text='')
+        self.notification = BlackJackLabelWidget(self, 0.5, 0.6)
+        self.player_text = BlackJackEntryWidget(self, 0.5, 0.4, 0.3, 0.05, text='')
+        self.yes_next = BlackJackButtons(self, 0.55, 0.9, text='Next', command=None)
+        self.no_back = BlackJackButtons(self, 0.45, 0.9, text='Back', command=self._no_back)
+        self.exit_button = BlackJackButtons(self, 0.05, 0.05, text="Exit",
+                                            command=lambda: Helpers.close_window(self.parent))
+        _choose_numbers(self.text_label, self.notification, self.player_text, self.yes_next, self.no_back, 'numDecks')
+        self.yes_next.parentCommand = self.start_game
+
+    def start_game(self):
+        self.destroy()
+        GameTable(self.parent)
+
+    def _no_back(self, *event):
+        pass
+
+
+class GameTable(tk.Canvas):
+
+    def __init__(self, parent):
+        # self.player_id = player_id
+        # self.player_name = player_name
+        super().__init__(master=parent)
+        self.pack(fill=tk.BOTH, expand=True)
+        self.bg = BlackJackLabelWidget(self, 0.5, 0.5)
+        self.bg.name = 'game_table'
+        original_image = cv2.imread('GameFiles/Images/GameTable.png')
+        b, g, r = cv2.split(original_image)
+        self.colorCorrected = cv2.merge((r, g, b))
+        self.bgImage = Image.fromarray(self.colorCorrected)
+        self.imageTk = ImageTk.PhotoImage(image=self.bgImage)
+        self.bg.image = self.imageTk
+        Helpers.background_images[self.bg.name] = self.bgImage
+        self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.bg))
+        #self.player_name = BlackJackLabelWidget(self, 0.038, 0.735, text="{}".format(self.player_name))
+
+
+def _choose_numbers(label_widget, notification_widget, text_widget, yes_next_button, no_back_button, selection_text):
+    def __set_numbers(player_selection):
+        """
+        Fix this section to run through multiple players
+        """
+        PlayerSelections[selection_text] = player_selection
+        yes_next_button.parentCommand()
+
+    def __confirm_numbers():
+        player_selection = re.sub(r'\D', '', text_widget.get())
+        if player_selection is '':
+            player_selection = 1
+        try:
+            player_selection = int(player_selection)
             while 1:
-                if i is '':
-                    i = 1
-                elif 0 <= int(i) <= 8:
-                    self.numDecks = int(i)
-                    self.chosen_name['text'] = "\rYou've selected {}\nIs that correct?".format(self.numDecks)
-                    self.next_button['command'] = self.verify_decks
+                if 0 <= player_selection <= max_num:
+                    notification_widget['fg'] = 'Black'
+                    notification_widget['text'] = "You've selected {}\nIs that correct?".format(int(player_selection))
+                    yes_next_button['command'] = lambda: __set_numbers(player_selection)
                     break
                 else:
-                    self.chosen_name['text'] = r"You've selected an invalid number, please try again."
+                    text_widget.delete(0, 'end')
+                    notification_widget['fg'] = 'Red'
+                    notification_widget['text'] = r"You've selected an invalid number, please try again."
+                    break
+        except ValueError:
+            text_widget.delete(0, 'end')
+            notification_widget['fg'] = 'Red'
+            notification_widget['text'] = r"You've selected an invalid number, please try again."
+            return
 
-    def verify_decks(self):
-        house.numDecks = self.numDecks
-        return
+    if selection_text == 'numPlayers':
+        label_widget['text'] = 'Players'
+        max_num = 7
+    elif selection_text == 'numDecks':
+        label_widget['text'] = 'Decks'
+        max_num = 8
+    text_widget.delete(0, 'end')
+    notification_widget['text'] = (
+        "How many {0} will there be?\nThe Default is 1 and Maximum allowed is {1}"
+        "\n Please select a number between 1 and {1} or press Next to use the Default of 1".format(
+            label_widget['text'], max_num
+        )
+    )
+    yes_next_button['command'] = lambda: __confirm_numbers()
 
-    def verify_name(self):
-        house.numPlayers = self.numPlayers
-        self.chosen_name['text'] = "How many Decks would you like to use?" \
-                                   "\nThe Default is 1 and Maximum allowed is 8" \
-                                   "\n Please select a number between 1 and 8 or press Enter to use the Default of 1"
-        self.next_button['command'] = self.num_decks
+
+PlayerSelections = {
+    'numPlayers': 0,
+    'numDecks': 0
+}
+
+PlayerObjects = dict()
 
 
 def show_card(master_window, player=None, suit=None, cardtype=None):
@@ -286,26 +403,3 @@ def show_card(master_window, player=None, suit=None, cardtype=None):
     __canvas.create_image(0, 0, image=__card, anchor=tk.NW)
     ___canvas.create_image(0, 0, image=___card, anchor=tk.NW)
     return canvas
-
-
-class GameTable(tk.Canvas):
-
-    def __init__(self):
-        super(GameTable, self).__init__()
-        self.bg_image = tk.PhotoImage(file='GameFiles/Images/GameTable.png')
-        self.image = self.bg_image
-        self.create_image(1, 1, image=self.bg_image, anchor=tk.NW)
-        hit = tk.Button(master=self, text='Hit', command=None).pack()
-        stand = tk.Button(master=self, text='Stand', command=None).pack()
-        self.create_window(50, 50, hit)
-        self.create_window(50, 50, stand)
-
-    def get_name(self, player_id=None):
-        frame = tk.Frame(master=self)
-        label = tk.Label(master=frame, text="Player {}:".format(player_id))
-        player_name = tk.Entry(master=self)
-        button = tk.Button(master=self, text="Enter", command=None)
-        label.grid(row=0)
-        player_name.grid(row=0)
-        button.grid(columnspan=2)
-        return
