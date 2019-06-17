@@ -169,19 +169,21 @@ class SelectPlayers(tk.Canvas):
 
         self.mp = mp
         self.playerNames = dict()
+        self.currentID = 1
         if self.mp is True:
             _choose_numbers(self.text_label, self.notification, self.player_text,
                             self.yes_next, self.no_back,
                             'numPlayers')
         else:
             PlayerSelections['numPlayers'] = 1
+            self.currentID = 1
             self.welcome_player()
 
     def welcome_player(self):
         self.yes_next['command'] = self._set_name
         self.text_label['text'] = 'Player Name:'
-        self.notification['text'] = "Welcome Player 1!" \
-                                    "\nPlease choose a name"
+        self.notification['text'] = "Welcome Player {}!" \
+                                    "\nPlease choose a name".format(self.currentID)
 
     def _set_name(self):
         name = re.sub(r"[^a-z]", '', re.escape(self.player_text.get()), flags=re.IGNORECASE)
@@ -210,16 +212,16 @@ class SelectPlayers(tk.Canvas):
             if len(self.playerNames.keys()) == PlayerSelections['numPlayers']:
                 self.create_players()
             else:
-                print('fff')
+                self.currentID = _id + 1
                 self.yes_next['command'] = self._set_name
                 self.text_label['text'] = 'Player Name:'
                 self.notification['text'] = "Welcome Player {}!" \
-                                            "\nPlease choose a name".format(_id + 1)
+                                            "\nPlease choose a name".format(self.currentID)
         except StopIteration:
             pass
 
     def _no_back(self, *event):
-        pass
+        self.welcome_player()
 
     def create_players(self):
         try:
@@ -287,7 +289,7 @@ class GameTable(tk.Canvas):
         self.bg.image = self.imageTk
         Helpers.background_images[self.bg.name] = self.bgImage
         self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.bg))
-        #self.player_name = BlackJackLabelWidget(self, 0.038, 0.735, text="{}".format(self.player_name))
+        # self.player_name = BlackJackLabelWidget(self, 0.038, 0.735, text="{}".format(self.player_name))
 
 
 def _choose_numbers(label_widget, notification_widget, text_widget, yes_next_button, no_back_button, selection_text):
