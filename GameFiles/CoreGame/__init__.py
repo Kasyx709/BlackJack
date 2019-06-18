@@ -7,6 +7,7 @@ from multiprocessing import JoinableQueue as jQueue
 from multiprocessing.dummy import Process as Thread
 from multiprocessing.managers import BaseManager
 
+
 class MetaHouse(type):
     _instances = {}
     token = os.urandom(256)
@@ -57,8 +58,6 @@ class MetaHouse(type):
         return
 
 
-
-
 class Deck(object):
     """
         Builds a deck using numpy arrays
@@ -87,9 +86,9 @@ class Deck(object):
     ]
     point_array = DataFrame(index=card_types, columns=['PointValues'])
 
-    def __init__(self):
+    def __init__(self, num_decks):
         super(Deck, self).__init__()
-        self.numDecks = self.num_decks()
+        self.numDecks = num_decks
         starting_num = 4 * self.numDecks
         self.deck = {card_type: starting_num for card_type in self.card_types}
         # Aces are initially assigned a value of 0, to be calculated later based upon current points
@@ -135,22 +134,6 @@ class Deck(object):
         Shoe.register('cards')
         _shoe = Shoe(address=(address, port), authkey=MetaHouse.token)
         return _shoe
-
-    @staticmethod
-    def num_decks():
-        while 1:
-            try:
-                num_decks = input("'How many Decks would you like to use?\nThe Default is 1 and Maximum allowed is 8"
-                                  "\nPlease select a number between 1 and 8 or press Enter to use the Default of 1:")
-                if num_decks == '':
-                    return 1
-                if 0 < int(num_decks) <= 8:
-                    return int(num_decks)
-                else:
-                    print(r"You've selected an invalid number, please try again.")
-                    continue
-            except ValueError:
-                print(r"That's not a valid number, please try again")
 
     def shuffle(self):
         try:

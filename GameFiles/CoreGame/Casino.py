@@ -2,6 +2,11 @@ from GameFiles.CoreGame import MetaHouse
 
 
 class House(metaclass=MetaHouse):
+    players = dict()
+    player_selections = {
+        'numPlayers': 0,
+        'numDecks': 0
+    }
     """
     Readies a new game by asking players how many decks
     they'd like to use and how many players will be playing
@@ -12,16 +17,13 @@ class House(metaclass=MetaHouse):
     """
 
     def __init__(self):
-        self.numPlayers = 0
-        self.numDecks = 0
         self.buildHouse()
         self.server.start()
-        self.players = None
         self.deck = None
         self.shoe = None
 
     def start_game(self):
-        self.deck = self.makeDeck()
+        self.deck = self.makeDeck(num_decks=self.player_selections['numDecks'])
         self.shoe = self.load_shoe('localhost', self.port)
         self.shoe.connect()
         cards = self.shoe.cards()
@@ -45,23 +47,7 @@ class House(metaclass=MetaHouse):
                 self.players[i].points = self.calc_points(self.players[i].playerCards, True)
             else:
                 self.players[i].points = self.calc_points(self.players[i].playerCards)
-            print(self.players[i], self.players[i].points)
-
-    def num_players(self):
-        while 1:
-            try:
-                num_players = input("\rHow many players will be joining the game?\r\nThe Maximum number allowed is 7"
-                                    "\r\nPlease select a number between 1 and 7 or press Enter to use the Default of 1:")
-                if num_players == '':
-                    return
-                elif 0 < int(num_players) <= 7:
-                    self.numPlayers = int(num_players)
-                    return
-                else:
-                    print("You've selected an invalid number of players, please try again.")
-                    continue
-            except ValueError:
-                print("That's not a valid number, please try again")
+            print('fff', self.players[i], self.players[i].points, self.players[i].playerCards)
 
     @staticmethod
     def create_player_name(id_key):

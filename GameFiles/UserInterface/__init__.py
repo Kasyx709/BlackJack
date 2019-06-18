@@ -168,6 +168,7 @@ class SelectPlayers(tk.Canvas):
                                             command=lambda: Helpers.close_window(self.parent))
 
         self.mp = mp
+        house.player_selections['numPlayers']
         self.playerNames = dict()
         self.currentID = 1
         if self.mp is True:
@@ -175,7 +176,7 @@ class SelectPlayers(tk.Canvas):
                             self.yes_next, self.no_back,
                             'numPlayers')
         else:
-            PlayerSelections['numPlayers'] = 1
+            house.player_selections['numPlayers'] = 1
             self.currentID = 1
             self.welcome_player()
 
@@ -207,9 +208,9 @@ class SelectPlayers(tk.Canvas):
     def get_id(self, name):
         try:
             self.notification['text'] = ''
-            _id = next(i for i in range(1, PlayerSelections['numPlayers'] + 1) if i not in self.playerNames.keys())
+            _id = next(i for i in range(1, house.player_selections['numPlayers'] + 1) if i not in self.playerNames.keys())
             self.playerNames[_id] = name
-            if len(self.playerNames.keys()) == PlayerSelections['numPlayers']:
+            if len(self.playerNames.keys()) == house.player_selections['numPlayers']:
                 self.create_players()
             else:
                 self.currentID = _id + 1
@@ -229,9 +230,9 @@ class SelectPlayers(tk.Canvas):
             self.playerNames[0] = 'Dealer'
             for i, name in self.playerNames.items():
                 if i is 0:
-                    PlayerObjects[0] = Dealer(player_id=0, port=house.port, authkey=house.token)
+                    house.players[0] = Dealer(player_id=0, port=house.port, authkey=house.token)
                 else:
-                    PlayerObjects[i] = Player(player_id=i, name=name, port=house.port, authkey=house.token)
+                    house.players[i] = Player(player_id=i, name=name, port=house.port, authkey=house.token)
             self.destroy()
             SelectDecks(self.parent)
         except Exception as e:
@@ -289,6 +290,7 @@ class GameTable(tk.Canvas):
         self.bg.image = self.imageTk
         Helpers.background_images[self.bg.name] = self.bgImage
         self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.bg))
+        house.start_game()
         # self.player_name = BlackJackLabelWidget(self, 0.038, 0.735, text="{}".format(self.player_name))
 
 
@@ -297,7 +299,7 @@ def _choose_numbers(label_widget, notification_widget, text_widget, yes_next_but
         """
         Fix this section to run through multiple players
         """
-        PlayerSelections[selection_text] = player_selection
+        house.player_selections[selection_text] = player_selection
         yes_next_button.parentCommand()
 
     def __confirm_numbers():
@@ -343,8 +345,6 @@ PlayerSelections = {
     'numPlayers': 0,
     'numDecks': 0
 }
-
-PlayerObjects = dict()
 
 
 def show_card(master_window, player=None, suit=None, cardtype=None):
