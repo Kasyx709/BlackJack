@@ -267,6 +267,7 @@ class SelectDecks(tk.Canvas):
 
     def start_game(self):
         self.destroy()
+        for i in house.players.keys():
         GameTable(self.parent)
 
     def _no_back(self, *event):
