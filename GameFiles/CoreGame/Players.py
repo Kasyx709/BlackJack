@@ -9,9 +9,10 @@ class Player(BaseManager):
         self.register('cards')
         self.playerID = player_id
         self.playerName = r'{}'.format(name)
-        self.points = 0
         self.playerKey = os.urandom(50)
-        self.playerCards = dict()
+        self.cards = {}
+        self.points = 0
+
 
 
 class Dealer(BaseManager):

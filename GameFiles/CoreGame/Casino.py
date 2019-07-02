@@ -21,8 +21,10 @@ class House(metaclass=MetaHouse):
         self.server.start()
         self.deck = None
         self.shoe = None
+        self.gameTable = None
 
-    def start_game(self):
+    def start_game(self, gametable):
+        self.gameTable = gametable
         self.deck = self.makeDeck(num_decks=self.player_selections['numDecks'])
         self.shoe = self.load_shoe('localhost', self.port)
         self.shoe.connect()
@@ -32,22 +34,14 @@ class House(metaclass=MetaHouse):
             cards.put(card)
         self.opening_deal(cards)
 
-    def run(self):
-        alive = True
-        while 1:
-            if alive:
-                pass
-            else:
-                break
-
     def opening_deal(self, cards):
-        for i in range(len(self.players.keys())):
-            self.players[i].playerCards = cards.get(), cards.get()
-            if i == 0:
-                self.players[i].points = self.calc_points(self.players[i].playerCards, True)
-            else:
-                self.players[i].points = self.calc_points(self.players[i].playerCards)
-            print('fff', self.players[i], self.players[i].points, self.players[i].playerCards)
+        print(self.players.keys())
+        for i in self.players.keys():
+            self.players[i].cards = cards.get(), cards.get()
+            self.players[i].points = self.calc_points(self.players[i].cards)
+
+    def hit(self):
+        pass
 
     @staticmethod
     def create_player_name(id_key):

@@ -208,7 +208,8 @@ class SelectPlayers(tk.Canvas):
     def get_id(self, name):
         try:
             self.notification['text'] = ''
-            _id = next(i for i in range(1, house.player_selections['numPlayers'] + 1) if i not in self.playerNames.keys())
+            _id = next(
+                i for i in range(1, house.player_selections['numPlayers'] + 1) if i not in self.playerNames.keys())
             self.playerNames[_id] = name
             if len(self.playerNames.keys()) == house.player_selections['numPlayers']:
                 self.create_players()
@@ -267,8 +268,7 @@ class SelectDecks(tk.Canvas):
 
     def start_game(self):
         self.destroy()
-        for i in house.players.keys():
-        GameTable(self.parent)
+        house.start_game(GameTable(self.parent))
 
     def _no_back(self, *event):
         pass
@@ -277,8 +277,6 @@ class SelectDecks(tk.Canvas):
 class GameTable(tk.Canvas):
 
     def __init__(self, parent):
-        # self.player_id = player_id
-        # self.player_name = player_name
         super().__init__(master=parent)
         self.pack(fill=tk.BOTH, expand=True)
         self.bg = BlackJackLabelWidget(self, 0.5, 0.5)
@@ -291,15 +289,10 @@ class GameTable(tk.Canvas):
         self.bg.image = self.imageTk
         Helpers.background_images[self.bg.name] = self.bgImage
         self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.bg))
-        house.start_game()
-        # self.player_name = BlackJackLabelWidget(self, 0.038, 0.735, text="{}".format(self.player_name))
 
 
 def _choose_numbers(label_widget, notification_widget, text_widget, yes_next_button, no_back_button, selection_text):
     def __set_numbers(player_selection):
-        """
-        Fix this section to run through multiple players
-        """
         house.player_selections[selection_text] = player_selection
         yes_next_button.parentCommand()
 
