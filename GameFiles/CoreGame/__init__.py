@@ -61,7 +61,7 @@ class MetaHouse(type):
 class Deck(object):
     """
         Builds a deck using numpy arrays
-        card_type_ace = Aces in the deck, can be worth 1 or 11 (player's choice or dealer algorithm)
+        ace = Aces in the deck, can be worth 1 or 11 (player's choice or dealer algorithm)
         card_point_value_10 = 10, Jack, Queen, King (all worth 10 points)
         Numbered cards = Cards from 2-9 (worth their numbered value)
         Cards Remaining = Number of cards left to be dealt, starting value of 52
@@ -70,19 +70,19 @@ class Deck(object):
     """
     card_types = [
         # Card Type
-        'card_type_ace',
-        'card_type_two',
-        'card_type_three',
-        'card_type_four',
-        'card_type_five',
-        'card_type_six',
-        'card_type_seven',
-        'card_type_eight',
-        'card_type_nine',
-        'card_type_ten',
-        'card_type_jack',
-        'card_type_queen',
-        'card_type_king',
+        'ace',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        'jack',
+        'queen',
+        'king',
     ]
     point_array = DataFrame(index=card_types, columns=['PointValues'])
 
@@ -119,9 +119,9 @@ class Deck(object):
         points = 0
         for card in cards:
             card = card.split(' ')[0]
-            if card == 'card_type_ace' and dealer:
+            if card == 'ace' and dealer:
                 points = points + cls.calc_ace(points)
-            elif card == 'card_type_ace' and not dealer:
+            elif card == 'ace' and not dealer:
                 pass
             else:
                 points = points + cls.point_array.loc[card].values

@@ -1,6 +1,5 @@
 from GameFiles.CoreGame import MetaHouse
 
-
 class House(metaclass=MetaHouse):
     players = dict()
     player_selections = {
@@ -33,6 +32,8 @@ class House(metaclass=MetaHouse):
             card = self.deck.shuffle()
             cards.put(card)
         self.opening_deal(cards)
+        for i in self.players.keys():
+            self.gameTable.show_card(self.players[i])
 
     def opening_deal(self, cards):
         print(self.players.keys())
@@ -68,4 +69,4 @@ class House(metaclass=MetaHouse):
 
 
 if __name__ == '__main__':
-    House().start_game()
+    pass
