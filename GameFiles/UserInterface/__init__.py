@@ -296,9 +296,9 @@ class GameTable(tk.Canvas):
         b, g, r = cv2.split(cv_image)
         colorCorrected = cv2.merge((r, g, b))
         # (1600, 650) Image Size
-        # Each Card = + 127 x 90 with 2 pixels space between on each side
-        # Math for x values = prev value + 132
-        # Math for y values = prev value + 94
+        # Each Card is 90 x 127 with 2 pixels space between on each side
+        # Math for y values = prev value + 132
+        # Math for x values = prev value + 94
         face_cards = {
             'ace': 1,
             'jack': 10,
@@ -311,21 +311,15 @@ class GameTable(tk.Canvas):
                 card = int(card)
             else:
                 card = face_cards[card]
-            card_x = (127 * (card)) + 132
-            card_y = (90 * (card)) + 90
-            print(card, suit)
+            card_x1 = (94 * card) - 94# Starting X
+            card_x2 = (94 * card) # Ending distance from X
+            print(card, suit, card_x1, card_x2)
 
             card_rows = {
-                'Clubs': colorCorrected[0: 132, card_x:card_y],
-                'Hearts': colorCorrected[130: 256, card_x:card_y],
-                'Spades': colorCorrected[262: 385, card_x:card_y],
-                'Diamonds': colorCorrected[394: 514, card_x:card_y],
-            }
-            card_rows = {
-                'Spades': colorCorrected[0: 132, card_y: card_x],
-                'Hearts': colorCorrected[130: 256, card_y: card_x],
-                'Clubs': colorCorrected[262: 385, card_y: card_x],
-                'Diamonds': colorCorrected[394: 514, card_y: card_x],
+                'Spades': colorCorrected[0: 132, card_x1: card_x2],
+                'Hearts': colorCorrected[130: 256, card_x1: card_x2],
+                'Clubs': colorCorrected[262: 385, card_x1: card_x2],
+                'Diamonds': colorCorrected[394: 514, card_x1: card_x2],
             }
             card_set = card_rows[suit]
             height, width, no_channels = card_set.shape
