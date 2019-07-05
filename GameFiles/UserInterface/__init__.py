@@ -293,6 +293,8 @@ class GameTable(tk.Canvas):
     def show_card(self, player):
         # card_image = ImageTk.PhotoImage(Image.open())
         cv_image = cv2.imread('GameFiles/CardSets/color_cards.png')
+        b, g, r = cv2.split(cv_image)
+        colorCorrected = cv2.merge((r, g, b))
         # (1600, 650) Image Size
         # Each Card = + 127 x 90 with 2 pixels space between on each side
         # Math for x values = prev value + 132
@@ -309,18 +311,25 @@ class GameTable(tk.Canvas):
                 card = int(card)
             else:
                 card = face_cards[card]
-            card_x = 132 * card
-            card_y = 94 * card
-            card_rows = {
-                'Spades': cv_image[0:127, card_x: card_y],
-                'Hearts': cv_image[130: 256, card_x: card_y],
-                'Clubs': cv_image[262: 385, card_x: card_y],
-                'Diamonds': cv_image[394: 514, card_x: card_y],
-            }
+            card_x = (127 * (card)) + 132
+            card_y = (90 * (card)) + 90
+            print(card, suit)
 
+            card_rows = {
+                'Clubs': colorCorrected[0: 132, card_x:card_y],
+                'Hearts': colorCorrected[130: 256, card_x:card_y],
+                'Spades': colorCorrected[262: 385, card_x:card_y],
+                'Diamonds': colorCorrected[394: 514, card_x:card_y],
+            }
+            card_rows = {
+                'Spades': colorCorrected[0: 132, card_y: card_x],
+                'Hearts': colorCorrected[130: 256, card_y: card_x],
+                'Clubs': colorCorrected[262: 385, card_y: card_x],
+                'Diamonds': colorCorrected[394: 514, card_y: card_x],
+            }
             card_set = card_rows[suit]
             height, width, no_channels = card_set.shape
-            print(card_x, card_y)
+            print(height, width)
             canvas = tk.Canvas(master=self, width=width, height=height)
             canvas.place(x=10, y=465)
             _card = ImageTk.PhotoImage(image=Image.fromarray(card_set))
