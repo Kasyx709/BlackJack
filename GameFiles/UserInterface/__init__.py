@@ -311,7 +311,7 @@ class GameTable(tk.Canvas):
                 card = int(card)
             else:
                 card = face_cards[card]
-            card_x1 = (94 * card) - 94# Starting X
+            card_x1 = (94 * card) - 91# Starting X
             card_x2 = (94 * card) # Ending distance from X
             print(card, suit, card_x1, card_x2)
 
