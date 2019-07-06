@@ -2,20 +2,10 @@ __package__ = 'GameFiles'
 from PIL import ImageTk
 from PIL import Image
 import cv2
-import sys
 import re
 
-py_version = sys.version_info[:3]
-if py_version >= (3, 0):
-    import tkinter as tk
-    from tkinter import font as tkFont
-    import concurrent.futures as thread
-
-if py_version <= (2, 7):
-    import Tkinter as tk
-    import tkFont
-    from multiprocessing.dummy import Process as thread
-
+import tkinter as tk
+from tkinter import font as tkFont
 from GameFiles.CoreGame.Casino import House
 from GameFiles.CoreGame.Players import Player, Dealer
 
@@ -35,8 +25,10 @@ class Helpers:
 
     @staticmethod
     def close_window(window):
+        import sys
         window.protocol("WM_DELETE_WINDOW")
         window.destroy()
+        sys.exit(-1)
 
     @staticmethod
     def resize_image(event, widget):
@@ -289,50 +281,30 @@ class GameTable(tk.Canvas):
         self.bg.image = self.imageTk
         Helpers.background_images[self.bg.name] = self.bgImage
         self.bind('<Configure>', lambda event: Helpers.resize_image(event, widget=self.bg))
+        exit_button = tk.Button(self, text="Exit", command=lambda: Helpers.close_window(parent))
+        exit_button.pack(anchor=tk.NW, padx=5, pady=5)
+        self.player_points = self.current_points()
+        self.dealer_points = self.current_points()
+        reset_button = tk.Button(self, text="Reset", command=self.reset_button)
+        reset_button.pack(anchor=tk.NW, padx=5, pady=5)
 
-    def show_card(self, player):
-        # card_image = ImageTk.PhotoImage(Image.open())
-        cv_image = cv2.imread('GameFiles/CardSets/color_cards.png')
-        b, g, r = cv2.split(cv_image)
-        colorCorrected = cv2.merge((r, g, b))
-        # (1600, 650) Image Size
-        # Each Card is 90 x 127 with 2 pixels space between on each side
-        # Math for y values = prev value + 132
-        # Math for x values = prev value + 94
-        face_cards = {
-            'ace': 1,
-            'jack': 10,
-            'queen': 11,
-            'king': 12
-        }
-        for i in player.cards:
-            card, suit = i.split()
-            if card not in face_cards:
-                card = int(card)
+    def current_points(self):
+        point_label = tk.Label(master=self, text='', width=0, height=1)
+        point_label.pack(anchor=tk.NW, pady=25, padx=5)
+        return point_label
+
+    def reset_button(self):
+        for i in house.players.keys():
+            house.players[i].points = 0
+            house.players[i].cards = {}
+            self.player_points.text = ''
+            self.dealer_points.text = ''
+        while 1:
+            if not house.shoe.cards().empty():
+                house.shoe.cards().get_nowait()
             else:
-                card = face_cards[card]
-            card_x1 = (94 * card) - 91# Starting X
-            card_x2 = (94 * card) # Ending distance from X
-            print(card, suit, card_x1, card_x2)
-
-            card_rows = {
-                'Spades': colorCorrected[0: 132, card_x1: card_x2],
-                'Hearts': colorCorrected[130: 256, card_x1: card_x2],
-                'Clubs': colorCorrected[262: 385, card_x1: card_x2],
-                'Diamonds': colorCorrected[394: 514, card_x1: card_x2],
-            }
-            card_set = card_rows[suit]
-            height, width, no_channels = card_set.shape
-            print(height, width)
-            canvas = tk.Canvas(master=self, width=width, height=height)
-            canvas.place(x=10, y=465)
-            _card = ImageTk.PhotoImage(image=Image.fromarray(card_set))
-            _card.image = _card
-            canvas.create_image(0, 0, image=_card, anchor=tk.NW)
-
-        # card_set = cards[row]
-
-        return canvas
+                break
+        house.start_game(self)
 
 
 def _choose_numbers(label_widget, notification_widget, text_widget, yes_next_button, no_back_button, selection_text):

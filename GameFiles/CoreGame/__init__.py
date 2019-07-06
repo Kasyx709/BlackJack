@@ -6,6 +6,10 @@ from pandas import DataFrame
 from multiprocessing import JoinableQueue as jQueue
 from multiprocessing.dummy import Process as Thread
 from multiprocessing.managers import BaseManager
+import cv2
+import tkinter as tk
+from PIL import ImageTk
+from PIL import Image
 
 
 class MetaHouse(type):
@@ -20,8 +24,11 @@ class MetaHouse(type):
         setattr(_house, 'makeDeck', Deck)
         setattr(_house, 'shuffle', Deck.shuffle)
         setattr(_house, 'load_shoe', Deck.load_shoe)
-        setattr(_house, 'calc_ace', Deck.calc_ace)
         setattr(_house, 'calc_points', Deck.calc_points)
+        setattr(_house, 'calc_ace', Deck.calc_ace)
+        setattr(_house, 'show_cards', Deck.show_cards)
+        setattr(_house, 'player_turn', Deck.player_turn)
+
         return _house
 
     def __call__(cls, *args, **kwargs):
@@ -164,6 +171,127 @@ class Deck(object):
         except Exception as e:
             print(e.__repr__())
 
+    @classmethod
+    def show_cards(self, game_table, players):
+        """
+        Uses an image map to select x,y coordinates indicating card location then displays the card onto the gametable.
+        If the card image used follows the example pattern of Spades, Hearts, Clubs, Diamonds and Ace through King
+        then the formula will not require modification.
+         Card map image size 1312 x 559 (13 cards with 1 pixel space between and 4 suits with 1 pixel space in between)
+         Card Size = 100 x 139
+         Math for y values = prev value + 132
+         Math for x values = prev value + 94
+        :param game_table:
+        :param players:
+        :return:
+        """
 
-if __name__ == '__main__':
-    pass
+        try:
+            for frame in game_table.winfo_children():
+                if isinstance(frame, tk.Canvas):
+                    frame.destroy()
+            for i in players.keys():
+                canvas_x = 15
+                anchor = tk.SW
+                side = tk.LEFT
+                if i is 0:
+                    canvas_x = 1175
+                    side = tk.RIGHT
+                    anchor = tk.SE
+                for card in players[i].cards:
+                    card_index, suit = card.split()
+                    card_image, height, width = Deck.find_card(card_index, suit)
+                    canvas = tk.Canvas(master=game_table,
+                                       width=width, height=height,
+                                       bd=0, highlightthickness=0,
+                                       relief='ridge')
+                    canvas.create_image(0, 0, image=card_image, anchor=tk.NW)
+                    canvas.pack(anchor=anchor, side=side)
+                    if i is 0:
+                        canvas_x -= 35
+                    else:
+                        canvas_x += 35
+        except Exception as e:
+            raise e
+
+    @classmethod
+    def find_card(cls, card_index, suit):
+        cv_image = cv2.imread('GameFiles/CardSets/Color_52_Faces.png')
+        b, g, r = cv2.split(cv_image)
+        color_correct = cv2.merge((r, g, b))
+        face_cards = {
+            'ace': 1,
+            'jack': 10,
+            'queen': 11,
+            'king': 12
+        }
+        if card_index not in face_cards:
+            card_index = int(card_index)
+        else:
+            card_index = face_cards[card_index]
+        upper_left = 101 * (card_index - 1)
+        upper_right = (101 * card_index) - 1
+        if card_index == 1:
+            upper_right = 100 * card_index
+        lower_left = 140
+        card_rows = {
+            'Clubs': color_correct[0: lower_left, upper_left: upper_right],
+            'Hearts': color_correct[140: lower_left * 2, upper_left: upper_right],
+            'Spades': color_correct[280: lower_left * 3, upper_left: upper_right],
+            'Diamonds': color_correct[420: lower_left * 4, upper_left: upper_right],
+        }
+        card_set = card_rows[suit]
+        card_image = ImageTk.PhotoImage(image=Image.fromarray(card_set))
+        card_image.image = card_image
+        height, width, no_channels = card_set.shape
+        return card_image, height, width
+
+    def player_turn(self, game_table, players, shoe):
+        player = players[1]
+        dealer = players[0]
+
+        def _dealer_turn():
+            if player.points > 21:
+                return
+            elif dealer.points <= 16:
+                dealer.cards = *dealer.cards, shoe.get()
+                dealer.points = Deck.calc_points(dealer.cards)
+
+        def _hit():
+            if dealer.points >= 21:
+                return
+            elif player.points < 21:
+                player.cards = *player.cards, shoe.get()
+                player.points = Deck.calc_points(player.cards)
+                _dealer_turn()
+                check_points()
+                Deck.show_cards(game_table, players)
+            return
+
+        def _stand():
+            _dealer_turn()
+            check_points()
+            Deck.show_cards(game_table, players)
+
+        hit = tk.Button(master=game_table, text='Hit', command=_hit)
+        hit.place(relx=0.015, rely=.55)
+        stand = tk.Button(master=game_table, text='Stand', command=_stand)
+        stand.place(relx=0.055, rely=.55)
+
+        def check_points():
+            if player.points > 21:
+                game_table.player_points['text'] = 'The House wins! Your Points - {}'.format(player.points)
+            elif player.points is 21:
+                if dealer.points is 21:
+                    game_table.player_points['text'] = 'BlackJack Tie - Nobody wins'
+                    game_table.dealer_points['text'] = 'BlackJack Tie - Nobody wins'
+                else:
+                    game_table.player_points['text'] = 'BlackJack - You win!'
+            elif player.points < 21 and dealer.points is 21:
+                game_table.dealer_points['text'] = 'BlackJack - The House wins'
+            else:
+                if dealer.points > 21:
+                    game_table.dealer_points['text'] = 'The House Busted! House - {}'.format(dealer.points)
+                else:
+                    game_table.dealer_points['text'] = 'House = {}'.format(dealer.points)
+                game_table.player_points['text'] = 'Player = {}'.format(player.points)

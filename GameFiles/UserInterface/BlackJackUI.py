@@ -14,7 +14,7 @@ class BlackJackUI(object):
         self.root = tk.Tk()
         self.root.font = tkFont.Font(family='Garamond', size=16, weight='bold')
         self.root.option_add("*Font", self.root.font)
-        self.root.wm_minsize(1058, 650)
+        self.root.wm_minsize(1312, 558)
         self.root.wm_resizable(width=1, height=1)
         self.root.wm_title('BlackJack - 2019')
         self.root.overrideredirect(True)

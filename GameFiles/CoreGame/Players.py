@@ -10,9 +10,8 @@ class Player(BaseManager):
         self.playerID = player_id
         self.playerName = r'{}'.format(name)
         self.playerKey = os.urandom(50)
-        self.cards = {}
+        self.cards = None
         self.points = 0
-
 
 
 class Dealer(BaseManager):
@@ -23,4 +22,4 @@ class Dealer(BaseManager):
         self.playerID = player_id
         self.points = 0
         self.dealerKey = os.urandom(256)
-        self.dealerCards = dict()
+        self.dealerCards = None
