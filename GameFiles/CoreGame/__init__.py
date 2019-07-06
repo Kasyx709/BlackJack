@@ -13,6 +13,10 @@ from PIL import Image
 
 
 class MetaHouse(type):
+    """
+    Custom metaclass that enables all required items to be bundled into one super class that's reused and safely
+    shareable.
+    """
     _instances = {}
     token = os.urandom(256)
 
@@ -126,10 +130,10 @@ class Deck(object):
         points = 0
         for card in cards:
             card = card.split(' ')[0]
-            if card == 'ace' and dealer:
+            if card == 'ace':  # and dealer:
                 points = points + cls.calc_ace(points)
-            elif card == 'ace' and not dealer:
-                pass
+            # elif card == 'ace' and not dealer:
+            #    pass
             else:
                 points = points + cls.point_array.loc[card].values
         return int(points)
@@ -246,9 +250,13 @@ class Deck(object):
         height, width, no_channels = card_set.shape
         return card_image, height, width
 
-    def player_turn(self, game_table, players, shoe):
-        player = players[1]
-        dealer = players[0]
+    @staticmethod
+    def player_turn(args, game_table, players, shoe):
+        for i in players.keys():
+            if i is 0:
+                dealer = players[i]
+            else:
+                player = players[i]
 
         def _dealer_turn():
             if player.points > 21:
@@ -294,4 +302,4 @@ class Deck(object):
                     game_table.dealer_points['text'] = 'The House Busted! House - {}'.format(dealer.points)
                 else:
                     game_table.dealer_points['text'] = 'House = {}'.format(dealer.points)
-                game_table.player_points['text'] = 'Player = {}'.format(player.points)
+                game_table.player_points['text'] = '{} = {}'.format(player.playerName, player.points)

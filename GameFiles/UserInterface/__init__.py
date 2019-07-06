@@ -165,8 +165,7 @@ class SelectPlayers(tk.Canvas):
         self.currentID = 1
         if self.mp is True:
             _choose_numbers(self.text_label, self.notification, self.player_text,
-                            self.yes_next, self.no_back,
-                            'numPlayers')
+                            self.yes_next, 'numPlayers')
         else:
             house.player_selections['numPlayers'] = 1
             self.currentID = 1
@@ -215,6 +214,7 @@ class SelectPlayers(tk.Canvas):
             pass
 
     def _no_back(self, *event):
+        self.notification['fg'] = 'Black'
         self.welcome_player()
 
     def create_players(self):
@@ -255,7 +255,7 @@ class SelectDecks(tk.Canvas):
         self.no_back = BlackJackButtons(self, 0.45, 0.9, text='Back', command=self._no_back)
         self.exit_button = BlackJackButtons(self, 0.05, 0.05, text="Exit",
                                             command=lambda: Helpers.close_window(self.parent))
-        _choose_numbers(self.text_label, self.notification, self.player_text, self.yes_next, self.no_back, 'numDecks')
+        _choose_numbers(self.text_label, self.notification, self.player_text, self.yes_next, 'numDecks')
         self.yes_next.parentCommand = self.start_game
 
     def start_game(self):
@@ -263,7 +263,7 @@ class SelectDecks(tk.Canvas):
         house.start_game(GameTable(self.parent))
 
     def _no_back(self, *event):
-        pass
+        _choose_numbers(self.text_label, self.notification, self.player_text, self.yes_next, 'numDecks')
 
 
 class GameTable(tk.Canvas):
@@ -307,7 +307,7 @@ class GameTable(tk.Canvas):
         house.start_game(self)
 
 
-def _choose_numbers(label_widget, notification_widget, text_widget, yes_next_button, no_back_button, selection_text):
+def _choose_numbers(label_widget, notification_widget, text_widget, yes_next_button, selection_text):
     def __set_numbers(player_selection):
         house.player_selections[selection_text] = player_selection
         yes_next_button.parentCommand()
