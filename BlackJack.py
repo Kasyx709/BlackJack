@@ -1,3 +1,4 @@
-from GameFiles.UserInterface.BlackJackUI import BlackJackUI
+from BlackJack.__main__ import main
 
-BlackJackUI()
+if __name__ == '__main__':
+    main()
