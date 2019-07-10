@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['BlackJack.py'],
-             pathex=['C:\\Windows\\System32\\downlevel', 'C:\\apps\\Python\\PycharmProjects\\BlackJack'],
+             pathex=['C:\\apps\\Python\\PycharmProjects\\BlackJack'],
              binaries=[],
              datas=[],
              hiddenimports=[],

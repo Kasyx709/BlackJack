@@ -17,7 +17,7 @@ class BlackJackUI(object):
         self.root.wm_minsize(1312, 558)
         self.root.wm_resizable(width=1, height=1)
         self.root.wm_title('BlackJack - 2019')
-        self.root.overrideredirect(True)
+        # self.root.overrideredirect(True)
         self.root.geometry("+250+250")
         self.root.wm_attributes("-topmost", True)
         self.root.configure(background='Green')

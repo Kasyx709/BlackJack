@@ -42,6 +42,6 @@ class House(metaclass=MetaHouse):
                 self.gameTable.dealer_points['text'] = 'House = {}'.format(self.players[i].points)
             else:
                 self.gameTable.player_points['text'] = '{} = {}'.format(self.players[i].playerName,
-                                                                            self.players[i].points)
+                                                                        self.players[i].points)
         self.show_cards(self.gameTable, self.players)
         self.player_turn(self.gameTable, self.players, cards)

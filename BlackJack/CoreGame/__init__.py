@@ -59,7 +59,8 @@ class MetaHouse(type):
         """
         turn_queue = jQueue()
 
-        class HouseManager(BaseManager): pass
+        class HouseManager(BaseManager):
+            pass
 
         HouseManager.register('cards', callable=lambda: turn_queue)
         HouseManager.register('start_server', callable=lambda _: _.serve_forever())
@@ -126,21 +127,20 @@ class Deck(object):
             return 11
 
     @classmethod
-    def calc_points(cls, cards, dealer=False):
+    def calc_points(cls, cards):
         points = 0
         for card in cards:
             card = card.split(' ')[0]
             if card == 'ace':  # and dealer:
                 points = points + cls.calc_ace(points)
-            # elif card == 'ace' and not dealer:
-            #    pass
             else:
                 points = points + cls.point_array.loc[card].values
         return int(points)
 
     @classmethod
     def load_shoe(cls, address, port):
-        class Shoe(BaseManager): pass
+        class Shoe(BaseManager):
+            pass
 
         Shoe.register('cards')
         _shoe = Shoe(address=(address, port), authkey=MetaHouse.token)
@@ -176,7 +176,7 @@ class Deck(object):
             print(e.__repr__())
 
     @classmethod
-    def show_cards(self, game_table, players):
+    def show_cards(cls, game_table, players):
         """
         Uses an image map to select x,y coordinates indicating card location then displays the card onto the gametable.
         If the card image used follows the example pattern of Spades, Hearts, Clubs, Diamonds and Ace through King

@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import font as tkFont
 from BlackJack.CoreGame.Casino import House
 from BlackJack.CoreGame.Players import Player, Dealer
+from BlackJack import resource_path
 
 house = House()
 
@@ -64,7 +65,7 @@ class BlackJackWindows(tk.Toplevel):
         super().__init__(master=parent)
         width, height = parent.wm_minsize()
         self.wm_minsize(width, height)
-        self.overrideredirect(True)
+        #self.overrideredirect(True)
         self.geometry("+250+250")
         self.wm_attributes("-topmost", True)
         self.configure(background='Green')
@@ -108,7 +109,7 @@ class SelectGameType(tk.Canvas):
     def __init__(self, parent):
         self.parent = parent
         super().__init__(master=parent)
-        original_image = cv2.imread(r'BlackJack/Images/LoginScreen.png')
+        original_image = cv2.imread(resource_path('BlackJack/Images/LoginScreen.png'))
         b, g, r = cv2.split(original_image)
         self.colorCorrected = cv2.merge((r, g, b))
         self.bgImage = Image.fromarray(self.colorCorrected)
@@ -142,7 +143,7 @@ class SelectPlayers(tk.Canvas):
         self.bg = BlackJackLabelWidget(self, 0.5, 0.5)
         self.bg.name = 'select_players'
         self.parent = parent
-        original_image = cv2.imread('BlackJack/Images/LoginScreen.png')
+        original_image = cv2.imread(resource_path('BlackJack/Images/LoginScreen.png'))
         b, g, r = cv2.split(original_image)
         self.colorCorrected = cv2.merge((r, g, b))
         self.bgImage = Image.fromarray(self.colorCorrected)
@@ -160,7 +161,6 @@ class SelectPlayers(tk.Canvas):
                                             command=lambda: Helpers.close_window(self.parent))
 
         self.mp = mp
-        house.player_selections['numPlayers']
         self.playerNames = dict()
         self.currentID = 1
         if self.mp is True:
@@ -240,7 +240,7 @@ class SelectDecks(tk.Canvas):
         self.bg = BlackJackLabelWidget(self, 0.5, 0.5)
         self.bg.name = 'select_decks'
         self.parent = parent
-        original_image = cv2.imread('BlackJack/Images/LoginScreen.png')
+        original_image = cv2.imread(resource_path('BlackJack/Images/LoginScreen.png'))
         b, g, r = cv2.split(original_image)
         self.colorCorrected = cv2.merge((r, g, b))
         self.bgImage = Image.fromarray(self.colorCorrected)
@@ -273,7 +273,7 @@ class GameTable(tk.Canvas):
         self.pack(fill=tk.BOTH, expand=True)
         self.bg = BlackJackLabelWidget(self, 0.5, 0.5)
         self.bg.name = 'game_table'
-        original_image = cv2.imread('BlackJack/Images/GameTable.png')
+        original_image = cv2.imread(resource_path('BlackJack/Images/GameTable.png'))
         b, g, r = cv2.split(original_image)
         self.colorCorrected = cv2.merge((r, g, b))
         self.bgImage = Image.fromarray(self.colorCorrected)
@@ -335,6 +335,7 @@ def _choose_numbers(label_widget, notification_widget, text_widget, yes_next_but
             notification_widget['text'] = r"You've selected an invalid number, please try again."
             return
 
+    max_num = 0
     if selection_text == 'numPlayers':
         label_widget['text'] = 'Players'
         max_num = 7
